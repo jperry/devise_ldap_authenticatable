@@ -120,6 +120,7 @@ module Devise
           DeviseLdapAuthenticatable::Logger.send("LDAP entry not found, using builder")
           @ldap_auth_username_builder.call(@attribute,@login,@ldap)
         else
+          DeviseLdapAuthenticatable::Logger.send("LDAP entry found for: #{ldap_entry.dn}")
           ldap_entry.dn
         end
       end
