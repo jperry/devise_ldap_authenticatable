@@ -117,6 +117,7 @@ module Devise
         DeviseLdapAuthenticatable::Logger.send("LDAP dn lookup: #{@attribute}=#{@login}")
         ldap_entry = search_for_login
         if ldap_entry.nil?
+          DeviseLdapAuthenticatable::Logger.send("LDAP entry not found, using builder")
           @ldap_auth_username_builder.call(@attribute,@login,@ldap)
         else
           ldap_entry.dn
