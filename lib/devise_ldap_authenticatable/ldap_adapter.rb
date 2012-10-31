@@ -96,8 +96,9 @@ module Devise
         @check_group_membership = ldap_config.has_key?("check_group_membership") ? ldap_config["check_group_membership"] : ::Devise.ldap_check_group_membership
         @required_groups = ldap_config["required_groups"]
         @required_attributes = ldap_config["require_attribute"]
+        @no_admin = ldap_config["no_admin"]
 
-        @ldap.auth ldap_config["admin_user"], ldap_config["admin_password"] if params[:admin]
+        @ldap.auth ldap_config["admin_user"], ldap_config["admin_password"] if params[:admin] && !@no_admin
 
         @login = params[:login]
         @password = params[:password]
